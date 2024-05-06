@@ -25,6 +25,18 @@ int Estacion::getTiempoDespues(void){
     return tiempoDespues;
 }
 
+int Estacion::TiempoAntes() const{
+    return tiempoAntes;
+}
+
+int Estacion::TiempoDespues() const{
+    return tiempoDespues;
+}
+string Estacion::Nombre() const{
+    return nombre;
+}
+
+
 int Estacion::getCantEstaciones(void){
     return cantEstaciones;
 }
@@ -46,9 +58,11 @@ void Estacion::setCantEstaciones(int cantidad){
 }
 
 void Estacion::operator=(const Estacion& nuevaEstacion){
-    tiempoAntes = nuevaEstacion.getTiempoAntes;
-    tiempoDespues = nuevaEstacion.getTiempoDespues;
-    nombre = nuevaEstacion.getNombre;
+    tiempoAntes = nuevaEstacion.TiempoAntes();
+    tiempoDespues = nuevaEstacion.TiempoDespues();
+    nombre = nuevaEstacion.Nombre();
 }
-
+bool Estacion::operator==(const Estacion& nuevaEstacion){
+    return((this->tiempoAntes==nuevaEstacion.TiempoAntes()) && (this->tiempoDespues==nuevaEstacion.TiempoDespues()) && (this->nombre==nuevaEstacion.Nombre()));
+}
 Estacion::~Estacion(){}

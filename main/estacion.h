@@ -27,7 +27,13 @@ public:
     void setTiempoDespues(int tiempoD);
     void setCantEstaciones(int cantidad);
 
+    //sobrecarga de metodos
+    int TiempoAntes() const;
+    int TiempoDespues() const;
+    string Nombre() const;
+
     void operator=(const Estacion& nuevaEstacion);
+    bool operator==(const Estacion& nuevaEstacion);
 
 
     ~Estacion();
