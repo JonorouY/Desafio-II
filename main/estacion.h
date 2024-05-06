@@ -14,7 +14,7 @@ private:
 
 
 public:
-
+    Estacion();
     Estacion(int tiempoA, int tiempoD, string name);
     Estacion(int tiempoA, int tiempoD, string name, string lineaA);
 
@@ -23,9 +23,12 @@ public:
     int getCantEstaciones(void);
     string getNombre(void);
 
-    setTiempoAntes(int tiempoA);
-    setTiempoDespues(int tiempoD);
-    setCantEstaciones(int cantidad);
+    void setTiempoAntes(int tiempoA);
+    void setTiempoDespues(int tiempoD);
+    void setCantEstaciones(int cantidad);
+
+    void operator=(const Estacion& nuevaEstacion);
+
 
     ~Estacion();
 };

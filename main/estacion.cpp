@@ -1,6 +1,11 @@
 #include "estacion.h"
 #include "funciones.h"
 
+Estacion::Estacion() {
+    tiempoAntes=-1;
+    tiempoDespues=-1;
+    nombre= "";
+}
 Estacion::Estacion(int tiempoA, int tiempoD, string name) {
 
     tiempoAntes = tiempoA; tiempoDespues = tiempoD ; nombre = name;
@@ -28,16 +33,22 @@ string Estacion::getNombre(void){
     return nombre;
 }
 
-Estacion::setTiempoAntes(int tiempoA){
+void Estacion::setTiempoAntes(int tiempoA){
     tiempoAntes = tiempoA;
 }
 
-Estacion::setTiempoDespues(int tiempoD){
+void Estacion::setTiempoDespues(int tiempoD){
     tiempoDespues = tiempoD;
 }
 
-Estacion::setCantEstaciones(int cantidad){
+void Estacion::setCantEstaciones(int cantidad){
     cantEstaciones = cantidad;
 }
 
-Estacion::~Estacion(){};
+void Estacion::operator=(const Estacion& nuevaEstacion){
+    tiempoAntes = nuevaEstacion.getTiempoAntes;
+    tiempoDespues = nuevaEstacion.getTiempoDespues;
+    nombre = nuevaEstacion.getNombre;
+}
+
+Estacion::~Estacion(){}
