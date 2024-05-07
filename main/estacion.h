@@ -9,7 +9,6 @@ class Estacion
 {
 private:
     int tiempoAntes, tiempoDespues;
-    int cantEstaciones = 0;
     string nombre, linea;
 
 
@@ -21,7 +20,9 @@ public:
     int getTiempoAntes(void);
     int getTiempoDespues(void);
     int getCantEstaciones(void);
+
     string getNombre(void);
+    string getLineaA(void);
 
     void setTiempoAntes(int tiempoA);
     void setTiempoDespues(int tiempoD);

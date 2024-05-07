@@ -8,8 +8,7 @@ Estacion::Estacion() {
 }
 Estacion::Estacion(int tiempoA, int tiempoD, string name) {
 
-    tiempoAntes = tiempoA; tiempoDespues = tiempoD ; nombre = name;
-    cantEstaciones++;
+    tiempoAntes = tiempoA; tiempoDespues = tiempoD; nombre = name; linea = "";
 }
 
 Estacion::Estacion(int tiempoA, int tiempoD, string name, string lineaA) {
@@ -36,13 +35,12 @@ string Estacion::Nombre() const{
     return nombre;
 }
 
-
-int Estacion::getCantEstaciones(void){
-    return cantEstaciones;
-}
-
 string Estacion::getNombre(void){
     return nombre;
+}
+
+string Estacion::getLineaA(void){
+    return linea;
 }
 
 void Estacion::setTiempoAntes(int tiempoA){
@@ -51,10 +49,6 @@ void Estacion::setTiempoAntes(int tiempoA){
 
 void Estacion::setTiempoDespues(int tiempoD){
     tiempoDespues = tiempoD;
-}
-
-void Estacion::setCantEstaciones(int cantidad){
-    cantEstaciones = cantidad;
 }
 
 void Estacion::operator=(const Estacion& nuevaEstacion){

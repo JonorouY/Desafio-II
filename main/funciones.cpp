@@ -124,3 +124,77 @@ string* aumentarNomLineaED(string *estructura,int primero){
     return estructura1;
 }
 
+Estacion** agregarEstacion(Estacion **estructura, int primero, int segundo,int lineaPosicion,int posicionAgregar,Estacion estacionAgregar,int *k){
+    bool lleno=true;
+    for(int i = 0 ; i < segundo; i++){
+        if (estructura[lineaPosicion][i].getNombre() == ""){
+            lleno=false;
+            break;
+        }
+    }
+    if (lleno){
+        estructura= aumentarEstacionED(estructura,primero,segundo);
+        segundo = segundo*2;
+        *k = 1;
+    }
+
+    Estacion **copiaEstructura = new Estacion *[primero];
+    for(int i = 0 ; i < primero ; i++){
+        copiaEstructura[i] = new Estacion [segundo];
+    }
+
+    //copiemos lo que hay en la estructura anterior
+    for(int i = 0 ; i < primero ; i++)
+    {
+        for(int j = 0 ; j < segundo ; j++)
+        {
+            copiaEstructura[i][j] = estructura[i][j];
+        }
+    }
+
+
+    for(int i = posicionAgregar ; i < (segundo-1) ; i++)
+    {
+        estructura[lineaPosicion][i+1] = copiaEstructura[lineaPosicion][i];
+    }
+
+    estructura[lineaPosicion][posicionAgregar]= estacionAgregar;
+    for(int i=0;i<primero;i++)
+    {
+        delete[] copiaEstructura[i];
+    }
+    delete[] copiaEstructura;
+
+    return estructura;
+}
+
+Estacion** eliminarEstacion(Estacion **estructura, int primero, int segundo,int lineaPosicion,int posicionEliminar){
+
+    Estacion **copiaEstructura = new Estacion *[primero];
+    for(int i = 0 ; i < primero ; i++){
+        copiaEstructura[i] = new Estacion [segundo];
+    }
+
+    //copiemos lo que hay en la estructura anterior
+    for(int i = 0 ; i < primero ; i++)
+    {
+        for(int j = 0 ; j < segundo ; j++)
+        {
+            copiaEstructura[i][j] = estructura[i][j];
+        }
+    }
+
+
+    for(int i = posicionEliminar ; i < (segundo-1) ; i++)
+    {
+        estructura[lineaPosicion][i] = copiaEstructura[lineaPosicion][i+1];
+    }
+
+    for(int i=0;i<primero;i++)
+    {
+        delete[] copiaEstructura[i];
+    }
+    delete[] copiaEstructura;
+
+    return estructura;
+}
