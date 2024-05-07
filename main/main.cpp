@@ -3,7 +3,7 @@
 
 int main()
 {
-    int linasActuales, lineasMax, estacionesActuales, estacionesMax;
+    int lineasMax, estacionesMax;
     lineasMax = 2;
     estacionesMax = 5;
 
@@ -32,9 +32,9 @@ int main()
 
     nomLineas[0] = "metro";
 
-    red[0][0] = Estacion (2,3,"jajaja");
+    red[0][0] = Estacion (-1,3,"jajaja");
     red[0][1] = Estacion (2,3,"ahsdhas");
-    red[0][2] = Estacion (3,4,"hola");
+    red[0][2] = Estacion (3,-1,"hola", "A");
 
 
     while(true)
@@ -44,8 +44,10 @@ int main()
         {
             limpiarPantalla();
 
+            cout << red[0][2].getLineaA()<< "9"<<endl;
+
             cout << "BIENVENIDO A LA RED METRO" << endl;
-            cout << "1. Agregar estacion a una linea."<< endl << "2. ." << endl << "3. ."<< endl << "4. ."<< endl << "5. ."<< endl << "6. ."<< endl << "7. ."<< endl << "8. ."<< endl << "9. Salir."<< endl;
+            cout << "1. Agregar estacion a una linea."<< endl << "2. Eliminar una estacion en una linea." << endl << "3. Numero de lineas en la red."<< endl << "4. Numero de estaciones en una linea."<< endl << "5. Saber si una estacion dada pertenecea una linea específica."<< endl << "6. Agregar una linea a la red."<< endl << "7. Eliminar una linea de la red."<< endl << "8. Numero de estaciones en la red."<< endl << "9. Salir."<< endl;
             cout << "Que desea hacer?" << endl;
             cin >> ingreso;
 
@@ -102,6 +104,7 @@ int main()
                 //Lugar donde desea agregar
                 contador = 0;
                 cout << "Los lugares donde puede agregar la estacion se marcaran con [#] " << linea << " son: " << endl;
+
                 cout << "[" << contador << "] ";
                 contador++;
 
@@ -111,7 +114,7 @@ int main()
                     {
                         if(red[i][j].getNombre() != "")
                         {
-                            cout << red[i][j].getNombre() << " [" << contador << "] ";
+                            cout << red[i][j].getNombre() << red[i][j].getLineaA() <<  " [" << contador << "] ";
                             contador++;
                         }
                     }
@@ -327,7 +330,7 @@ int main()
                     {
                         if(red[i][j].getNombre() != "")
                         {
-                            cout << " [" << contador << "]" << red[i][j].getNombre();
+                            cout << " [" << contador << "]" << red[i][j].getNombre() << red[i][j].getLineaA();
                             contador++;
                         }
                     }
@@ -352,6 +355,39 @@ int main()
                     break;
                 }
 
+                if(red[contadorLinea][ingresoInt].getLineaA() != " ")
+                {
+                    cout << "No se puede eliminar una estacion de transferencia. Ingrese cualquier caracter para continuar" << endl;
+                    cin >> ingreso;
+                    break;
+                }
+
+                //Tiempo
+                if(ingresoInt == 0)
+                {
+
+                    //Cambiamos el tiempoA de la estacion siguiente a -1
+                    red[contadorLinea][ingresoInt+1].setTiempoAntes(-1);
+
+                    //cout << red[contadorLinea][ingresoInt+1].getTiempoAntes()<< endl;
+                }
+                else if(ingresoInt == contador-1)
+                {
+                    //Cambiamos el tiempoD de la estacion anterior a -1
+                    red[contadorLinea][ingresoInt-1].setTiempoDespues(-1);
+
+                    cout << red[contadorLinea][ingresoInt-1].getTiempoDespues()<< endl;
+                }
+                else
+                {
+                    //Calculamos el tiempoA de la estacion siguiente, que es la suma de tiempoD de la estacion anterior y tiempoD de la estacion a eliminar
+                    red[contadorLinea][ingresoInt-1].setTiempoDespues(red[contadorLinea][ingresoInt-1].getTiempoDespues() + red[contadorLinea][ingresoInt].getTiempoDespues());
+                    red[contadorLinea][ingresoInt+1].setTiempoAntes(red[contadorLinea][ingresoInt+1].getTiempoAntes() + red[contadorLinea][ingresoInt].getTiempoAntes());
+
+                    //cout << red[contadorLinea][ingresoInt+1].getTiempoAntes()<< endl;
+                    //cout << red[contadorLinea][ingresoInt-1].getTiempoDespues()<< endl;
+                }
+
                 eliminarEstacion(red, lineasMax, estacionesMax, contadorLinea, ingresoInt);
 
                 break;
@@ -361,12 +397,73 @@ int main()
         //Opcion 3
         else if(ingreso == "3")
         {
+            limpiarPantalla();
 
+            contador=0;
+            for(int i = 0 ; i < lineasMax ; i++)
+            {
+                if(nomLineas[i] == "")
+                {
+                    break;
+                }
+                contador++;
+            }
+
+            cout << "La red tiene " << contador << " lineas. Ingrese cualquier caracter para continuar."<< endl;
+            cin >> ingreso;
         }
 
         //Opcion 4
         else if(ingreso == "4")
         {
+            //Opciones de linea
+            while(true)
+            {
+                limpiarPantalla();
+                contador = 0;
+
+                cout << "Las lineas actuales son:" << endl;
+
+                for(int i = 0 ; i < lineasMax ; i++)
+                {
+                    if(nomLineas[i] != "")
+                    {
+                        cout << nomLineas[i] << " | ";
+                    }
+                }
+                cout << endl;
+
+                cout << "En cual linea desea conocer el numero de estaciones?" << endl;
+                cin >> linea;
+
+                for(int i = 0 ; i < lineasMax ; i++)
+                {
+                    if(linea == nomLineas[i])
+                    {
+                        contadorLinea =i;
+                        break;
+                    }
+                }
+
+                if(linea == nomLineas[contadorLinea])
+                {
+                    break;
+                }
+
+                cout << "La linea ingresada no existe. Ingrese cualquier caracter para continuar" << endl;
+                cin >> linea;
+            }
+
+            for(int i = 0; i < estacionesMax ; i++)
+            {
+                if(red[contadorLinea][i].getNombre() == "")
+                {
+                    break;
+                }
+                contador++;
+            }
+            cout << "Hay " << contador << " estaciones en " << nomLineas[contadorLinea] << " . Ingrese cualquier caracter para continuar. " << endl;
+            cin >> ingreso;
 
         }
 

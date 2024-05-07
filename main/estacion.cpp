@@ -5,15 +5,22 @@ Estacion::Estacion() {
     tiempoAntes=-1;
     tiempoDespues=-1;
     nombre= "";
+    linea=" ";
 }
 Estacion::Estacion(int tiempoA, int tiempoD, string name) {
 
-    tiempoAntes = tiempoA; tiempoDespues = tiempoD; nombre = name; linea = "";
+    tiempoAntes = tiempoA;
+    tiempoDespues = tiempoD;
+    nombre = name;
+    linea = " ";
 }
 
-Estacion::Estacion(int tiempoA, int tiempoD, string name, string lineaA) {
+Estacion::Estacion(int tiempoA, int tiempoD, string name, string lineaActual) {
 
-    tiempoAntes = tiempoA; tiempoDespues = tiempoD ; nombre = name; linea = lineaA;
+    tiempoAntes = tiempoA;
+    tiempoDespues = tiempoD;
+    nombre = name;
+    linea = lineaActual;
 }
 
 int Estacion::getTiempoAntes(void){

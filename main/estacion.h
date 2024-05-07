@@ -9,13 +9,14 @@ class Estacion
 {
 private:
     int tiempoAntes, tiempoDespues;
-    string nombre, linea;
+    string nombre;
+    string linea;
 
 
 public:
     Estacion();
     Estacion(int tiempoA, int tiempoD, string name);
-    Estacion(int tiempoA, int tiempoD, string name, string lineaA);
+    Estacion(int tiempoA, int tiempoD, string name, string lineaActual);
 
     int getTiempoAntes(void);
     int getTiempoDespues(void);
