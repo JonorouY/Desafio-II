@@ -22,6 +22,7 @@ int main()
     nomLineas[1] = "lineaB";
 
     //Si una estacion está en un extremo porfavor poner -1, y si es de transferencia poner el caracter de la linea a la cual corresponde
+
     red[0][0] = Estacion (-1,600,"El Carmen");
     red[0][1] = Estacion (700,3000,"Rio Negro");
     red[0][2] = Estacion (2800,-1,"Medellin", "A");
@@ -563,6 +564,11 @@ int main()
             if(nomLineas[0] == "")
             {
                 nomLineas[0] = "lineaA";
+
+                cout << "Cual es el nombre de la estacion de transferencia?" << endl;
+                cin >> ingreso;
+
+                red[0][0] = Estacion (-1,-1,ingreso,"A");
             }
             else
             {
@@ -605,6 +611,7 @@ int main()
                     cout << "La linea ingresada no existe. Ingrese cualquier caracter para continuar" << endl;
                     cin >> linea;
                 }
+
                 //Ingreso de estacion
                 while(true)
                 {
