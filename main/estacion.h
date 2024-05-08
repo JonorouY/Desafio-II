@@ -33,6 +33,7 @@ public:
     int TiempoAntes() const;
     int TiempoDespues() const;
     string Nombre() const;
+    string LineaA() const;
 
     void operator=(const Estacion& nuevaEstacion);
     bool operator==(const Estacion& nuevaEstacion);

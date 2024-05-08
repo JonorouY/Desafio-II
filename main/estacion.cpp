@@ -41,6 +41,9 @@ int Estacion::TiempoDespues() const{
 string Estacion::Nombre() const{
     return nombre;
 }
+string Estacion::LineaA() const{
+    return linea;
+}
 
 string Estacion::getNombre(void){
     return nombre;
@@ -62,8 +65,9 @@ void Estacion::operator=(const Estacion& nuevaEstacion){
     tiempoAntes = nuevaEstacion.TiempoAntes();
     tiempoDespues = nuevaEstacion.TiempoDespues();
     nombre = nuevaEstacion.Nombre();
+    linea = nuevaEstacion.LineaA();
 }
 bool Estacion::operator==(const Estacion& nuevaEstacion){
-    return((this->tiempoAntes==nuevaEstacion.TiempoAntes()) && (this->tiempoDespues==nuevaEstacion.TiempoDespues()) && (this->nombre==nuevaEstacion.Nombre()));
+    return((this->tiempoAntes==nuevaEstacion.TiempoAntes()) && (this->tiempoDespues==nuevaEstacion.TiempoDespues()) && (this->nombre==nuevaEstacion.Nombre())&& (this->linea==nuevaEstacion.Nombre()));
 }
 Estacion::~Estacion(){}

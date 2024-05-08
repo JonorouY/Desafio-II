@@ -37,7 +37,7 @@ int main()
     red[0][1] = Estacion (2,3,"ahsdhas");
     red[0][2] = Estacion (3,-1,"hola", "A");
     red[1][0] = Estacion (-1,3,"hola", "B");
-    red[1][1] = Estacion (3,-1,"juan", "A");
+    red[1][1] = Estacion (3,-1,"juan");
 
 
     while(true)
@@ -46,8 +46,6 @@ int main()
         while(true)
         {
             limpiarPantalla();
-
-            cout << red[0][2].getLineaA()<< "9"<<endl;
 
             cout << "BIENVENIDO A LA RED METRO" << endl;
             cout << "1. Agregar estacion a una linea."<< endl << "2. Eliminar una estacion en una linea." << endl << "3. Numero de lineas en la red."<< endl << "4. Numero de estaciones en una linea."<< endl << "5. Saber si una estacion dada pertenecea una linea específica."<< endl << "6. Agregar una linea a la red."<< endl << "7. Eliminar una linea de la red."<< endl << "8. Numero de estaciones en la red."<< endl << "9. Salir."<< endl;
@@ -592,6 +590,8 @@ int main()
                 int mayor = 0;
                 string k = "";
 
+                //buscar el valor de get.lineaA
+
                 if(red[linea1][estacion].getLineaA() == " ")
                 {
                     red[linea1][estacion].getLineaA()="A";
@@ -602,9 +602,13 @@ int main()
                     {
                         for (int j = 0; j < estacionesMax; j++)
                         {
-                            if(red[i][j].getNombre() == linea)
+
+                            if(red[i][j].getNombre() == red[linea1][estacion].getNombre())
                             {
-                                char letra = red[linea1][estacion].getLineaA()[0];
+                                char letra = red[i][j].getLineaA()[0];
+
+
+                                cout << "entre" <<endl;
                                 int codigo_ascii = static_cast<int>(letra);
                                 if(codigo_ascii > mayor)
                                 {
@@ -615,7 +619,6 @@ int main()
                     }
                     mayor += 1;
                     char codigo_ascii = static_cast<char>(mayor);
-                    cout << codigo_ascii << endl;
                     k += codigo_ascii;
                 }
 
@@ -643,15 +646,14 @@ int main()
                 }
 
                 string nombre1 =red[linea1][estacion].getNombre();
-                cout << nombre1 << endl;
-                cout << ubicacionLinea << endl;
-                cout << k << endl;
+
                 if(X){
                     red[ubicacionLinea][0]= Estacion (-1,-1,nombre1,"B");
                 }
                 else{
                     red[ubicacionLinea][0]= Estacion (-1,-1,nombre1,k);
                 }
+
                 break;
             }
         }
@@ -690,6 +692,11 @@ int main()
                     if (cantidadEst == 0){
                         limpiarPantalla();
                         cout << "La linea  se ha eliminado correctamente. Ingresa cualquier caracter para continuar" << endl;
+                        cin >> linea;
+                    }
+                    else{
+                        limpiarPantalla();
+                        cout << "La linea  no se ha eliminado correctamente. Ingresa cualquier caracter para continuar" << endl;
                         cin >> linea;
                     }
                 }
