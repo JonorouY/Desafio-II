@@ -1,4 +1,6 @@
 #include "funciones.h"
+#include <chrono>
+#include <ctime>
 
 using namespace std;
 
@@ -228,4 +230,48 @@ Estacion** eliminarlinea(Estacion **estructura, int primero, int segundo,string 
     nomLineas[0]= "";
 
     return estructura;
+}
+
+
+tm agregarSegundos(int segundoAAgregar)
+{
+    // Obtener el tiempo actual en el reloj del sistema
+    auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+
+    // Sumar los segundos especificados a la hora actual
+    currentTime += segundoAAgregar;
+
+    // Convertir el tiempo a una estructura de tiempo local
+    return *std::localtime(&currentTime);
+}
+
+void calculoTiempoLLegada(Estacion **estructura, int linea, int estacionInicio, int estacionFinal){
+
+    int tiempoSuma = 0;
+
+    if(estacionInicio > estacionFinal)
+    {
+        for(int i = estacionFinal ; i <= estacionInicio ; i++)
+        {
+            if(estructura[linea][i].getTiempoAntes() != -1)
+            {
+                tiempoSuma+= estructura[linea][i].getTiempoAntes();
+            }
+        }
+    }
+    else
+    {
+        for(int i = estacionInicio ; i <= estacionFinal ; i++)
+        {
+            if(estructura[linea][i].getTiempoDespues() != -1)
+            {
+                tiempoSuma+= estructura[linea][i].getTiempoDespues();
+            }
+        }
+    }
+
+    tm tiempoLlegada =agregarSegundos(tiempoSuma);
+    //cout << "Hora actual + " << tiempoSuma << " segundos: " << endl;
+
+    cout << "El tiempo de llegada estimado es: "<<tiempoLlegada.tm_hour << ":" << tiempoLlegada.tm_min << ":" << tiempoLlegada.tm_sec << endl;
 }
