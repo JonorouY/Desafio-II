@@ -198,3 +198,34 @@ Estacion** eliminarEstacion(Estacion **estructura, int primero, int segundo,int 
 
     return estructura;
 }
+Estacion** eliminarlinea(Estacion **estructura, int primero, int segundo,string *nomLineas){
+    Estacion **copiaEstructura = new Estacion *[primero];
+    for(int i = 0 ; i < primero ; i++){
+        copiaEstructura[i] = new Estacion [segundo];
+    }
+
+    //copiemos lo que hay en la estructura anterior
+    for(int i = 0 ; i < primero ; i++)
+    {
+        for(int j = 0 ; j < segundo ; j++)
+        {
+            copiaEstructura[i][j] = estructura[i][j];
+        }
+    }
+
+    for(int i = 0 ; i < segundo ; i++){
+        estructura[0][i] = copiaEstructura[1][i];
+    }
+
+    //liberar espacio de memoria
+
+    for(int i=0;i<primero;i++)
+    {
+        delete[] copiaEstructura[i];
+    }
+    delete[] copiaEstructura;
+
+    nomLineas[0]= "";
+
+    return estructura;
+}
