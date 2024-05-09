@@ -251,7 +251,7 @@ void calculoTiempoLLegada(Estacion **estructura, int linea, int estacionInicio, 
 
     if(estacionInicio > estacionFinal)
     {
-        for(int i = estacionFinal ; i <= estacionInicio ; i++)
+        for(int i = estacionInicio ; i > estacionFinal ; i--)
         {
             if(estructura[linea][i].getTiempoAntes() != -1)
             {
@@ -261,7 +261,7 @@ void calculoTiempoLLegada(Estacion **estructura, int linea, int estacionInicio, 
     }
     else
     {
-        for(int i = estacionInicio ; i <= estacionFinal ; i++)
+        for(int i = estacionInicio ; i < estacionFinal ; i++)
         {
             if(estructura[linea][i].getTiempoDespues() != -1)
             {
@@ -271,7 +271,7 @@ void calculoTiempoLLegada(Estacion **estructura, int linea, int estacionInicio, 
     }
 
     tm tiempoLlegada =agregarSegundos(tiempoSuma);
-    //cout << "Hora actual + " << tiempoSuma << " segundos: " << endl;
+    cout << "Hora actual + " << tiempoSuma << " segundos: " << endl;
 
     cout << "El tiempo de llegada estimado es: "<<tiempoLlegada.tm_hour << ":" << tiempoLlegada.tm_min << ":" << tiempoLlegada.tm_sec << endl;
 }

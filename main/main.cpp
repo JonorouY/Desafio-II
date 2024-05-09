@@ -16,7 +16,7 @@ int main()
 
     //Creamos el nombre de las lineas
     string *nomLineas = new string [lineasMax];
-
+/*
     //El nombre de las lineas no se puede modificar
     nomLineas[0] = "lineaA";
     nomLineas[1] = "lineaB";
@@ -28,7 +28,7 @@ int main()
     red[0][2] = Estacion (2800,-1,"Medellin", "A");
     red[1][0] = Estacion (-1,2800,"Medellin", "B");
     red[1][1] = Estacion (2800,-1,"Barbosa");
-
+*/
     string linea;
     string ingreso;
     string nombre;
@@ -183,7 +183,7 @@ int main()
                         //Si estamos creando la primera estacion
                         if(red[contadorLinea][ingresoInt].getNombre() != "")
                         {
-                            cout << "Ingrese el tiempo a la estacion " << red[contadorLinea][ingresoInt].getNombre() << endl;
+                            cout << "Ingrese el tiempo de la estacion " << red[contadorLinea][ingresoInt].getNombre() << " a la estacion " << nombre <<endl;
                             cin >> ingreso;
                             try {
                                 tiempoD = stoi(ingreso);
@@ -198,10 +198,29 @@ int main()
                                 cin >> ingreso;
                                 break;
                             }
-                            tiempoA = -1;
 
                             //Cambiamos tiempoA de la estacion siguiente a tiempoD de la estacion actual
                             red[contadorLinea][ingresoInt].setTiempoAntes(tiempoD);
+
+                            cout << "Ingrese el tiempo de la estacion " << nombre << " a la estacion "<< red[contadorLinea][ingresoInt].getNombre()<< endl;
+                            cin >> ingreso;
+                            try {
+                                tiempoD = stoi(ingreso);
+
+                                if((tiempoD <= 0))
+                                {
+                                    cout << "El tiempo no puede ser negativo ni 0. Ingrese cualquier caracter para continuar " << endl;
+                                    cin >> ingreso;
+                                    break;
+                                }
+                            } catch (const std::invalid_argument& e) {
+                                cout << "El tiempo debe ser un numero natural. Ingrese cualquier caracter para continuar " << endl;
+                                cin >> ingreso;
+                                break;
+                            }
+
+                            tiempoA = -1;
+
 
                             //cout << red[contadorLinea][ingresoInt].getTiempoAntes()<< endl;
                         }
@@ -213,7 +232,7 @@ int main()
                     }
                     else if(ingresoInt == contador-1)
                     {
-                        cout << "Ingrese el tiempo a la estacion " << red[contadorLinea][ingresoInt-1].getNombre()<< endl;
+                        cout << "Ingrese el tiempo de la estacion " << red[contadorLinea][ingresoInt-1].getNombre() << " a la estacion " << nombre <<endl;
                         cin >> ingreso;
                         try {
                             tiempoA = stoi(ingreso);
@@ -229,12 +248,33 @@ int main()
                             cin >> ingreso;
                             break;
                         }
-                        tiempoD = -1;
 
                         //Cambiamos tiempoA de la estacion siguiente a tiempoD de la estacion actual
                         red[contadorLinea][ingresoInt-1].setTiempoDespues(tiempoA);
 
+                        cout << "Ingrese el tiempo de la estacion " << nombre << " a la estacion "<< red[contadorLinea][ingresoInt-1].getNombre()<< endl;
+                        cin >> ingreso;
+                        try {
+                            tiempoA = stoi(ingreso);
+
+                            if((tiempoA <= 0))
+                            {
+                                cout << "El tiempo no puede ser negativo ni 0. Ingrese cualquier caracter para continuar " << endl;
+                                cin >> ingreso;
+                                break;
+                            }
+                        } catch (const std::invalid_argument& e) {
+                            cout << "El tiempo debe ser un numero natural. Ingrese cualquier caracter para continuar " << endl;
+                            cin >> ingreso;
+                            break;
+                        }
+
+
+
                         //cout << red[contadorLinea][ingresoInt-1].getTiempoDespues()<< endl;
+
+                        tiempoD=-1;
+
                     }
                     else
                     {
